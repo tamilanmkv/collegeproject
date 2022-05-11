@@ -11,16 +11,26 @@
     <script type="text/javascript">
     function initMap() {
         new google.maps.Map(document.getElementById('map'), {
-					center: {lat: 37.4419, lng: -122.1419}, //37.4419, -122.1419
-            zoom: 16
+					center: {lat: 11.127123 , lng: 78.656891 }, //37.4419, -122.1419
+            zoom: 9
+          }
+          
+          );
+          var latitude = 11.127123;
+          var longitude = 78.656891;
+          var marker = new google.maps(document.getElementById('map')).Marker({
+            position: {lat: latitude, lng: longitude},
+            map: map,
+            title: 'Hello World!'
           });
-    }
+          markker.setMap(map);
+        }
     </script>
   </head>
   <body>
     <div class="container">
       <h1>My camera</h1>
-    <div id="map" style="width:100%; height:500px;" ></div>
+    <div id="map" style="width:100%; height:700px;" ></div>
   </div>  
   </body>
 </html>

@@ -1,17 +1,25 @@
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  const uluru = { lat: -25.344, lng: 131.031 };
-  // The map, centered at Uluru
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 4,
-    center: uluru,
+function initMap(data) {
+    
+  var center = {lat: data[2]["latitude"], data[3]["longitude"]};
+  var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: center
   });
-  // The marker, positioned at Uluru
-  const marker = new google.maps.Marker({
-    position: uluru,
-    map: map,
+  
+  var infowindow =  new google.maps.InfoWindow({});
+  var marker;
+  
+  data.forEach(e => {
+      marker = new google.maps.Marker({
+      position: new google.maps.LatLng(e["latitude"], e["longitude"]),
+      map: map,
+      title: e["address"],
+  });
+      google.maps.event.addListener(marker, 'click', (function (marker) {
+          return function () {
+              infowindow.setContent("State: ${e['state']<br>County: ${e['location']}<br>Address: ${e['address']}");
+              infowindow.open(map, marker);
+          }
+      })(marker));
   });
 }
-
-window.initMap = initMap;

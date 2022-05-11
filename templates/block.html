@@ -2,27 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--use some bootstap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!--sytle-->
     <style>
         body{
             background-color: black;
-            color: white;
+            font-family: monospace;
+            text-align: center;
+        }form{
+            margin: 0 auto;
+            width: 50%;
+            border-collapse: collapse;
+            border-radius: 20px;
+            background-color: white;
+            color: rgb(190, 10, 25);
+            padding: 15px;
+            text-shadow: rgb(0, 17, 255) 1px 1px 20px;
+        }
+        input{
+            margin: 0 auto;
+            text-align: center;
+            border-color: rgb(255, 0, 0);
+            box-sizing: 10px;
+            border-radius: 10px;
+            font-family: monospace;
+            text-shadow: black 0px 0px 10px;
+        }
+        button{
+            margin: 0 auto;
+            border-radius: 10px;
+            font-family: monospace;
+            text-shadow: black 0px 0px 10px;
         }
         h1{
             text-align: center;
             width: 60%;
             background-color: skyblue;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: monospace;
             color: white;
             padding: 10px;
             margin: 0 auto;
             border-radius: 20px;
             text-shadow: black 0px 0px 10px;
-            
         }
         table{
             margin: 10px;
@@ -34,10 +55,11 @@
             color: rgb(190, 10, 25);
             padding: 20px;
             text-shadow: rgb(0, 17, 255) 1px 1px 20px;
-        }tr{
+        }
+        tr{
             margin: 0 auto;
             border-radius: 20px;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: monospace;
             text-shadow: black 0px 0px 10px;
         }
         th{
@@ -45,34 +67,31 @@
             margin: 0 auto;
             border-radius:20px;
             color: green;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: monospace;
             padding: 20px;
             text-shadow: black 0px 0px 10px;
-
         }
-        td{ 
+        td{
             margin: 0 auto;
             text-align: center;
             border-color: rgb(255, 0, 0);
-            font-family: 'Courier New', Courier, monospace  ;
+            font-family: monospace;
             text-shadow: black 0px 0px 10px;
             padding: 15px;
-        }input{
-            margin: 0 auto;
-            text-align: center;
-            text-shadow: black 0px 0px 10px;
-            font-family: 'Courier New', Courier, monospace;
-            border-radius: 20px;
-            background-color: skyblue;
-            color: white;
-            box-shadow: black 0px 0px 10px;
         }
-
     </style>
-    <title>Mysql Data</title>
+    <title>BLOCK LIST</title>
 </head>
 <body>
-    <h1>USER DATA</h1>
+    <h1>BLOCK LIST</h1>
+    <br>
+    <br>
+    <form action="/block" method="post">
+        <input type="text" name="block" placeholder="Enter Block Number">
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
     <br>
     <br>
     <table>
@@ -98,4 +117,4 @@
         {% endfor %}
     </table>
 </body>
-</html>     
+</html>
