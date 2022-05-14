@@ -63,6 +63,14 @@ def add():
         return render_template("index.html")
     else:
         return render_template("index.html")
+@app.route('/other')
+def other():
+    # fetch data from findBlock
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT * FROM findBlock")
+    myresult = mycursor.fetchall()
+    return render_template('other.html', results=myresult,)
+    #return render_template('other.html')
 
 @app.route('/block', methods=['GET','POST'])
 def block():
