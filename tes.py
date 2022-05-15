@@ -1,3 +1,4 @@
+from re import A
 from cv2 import trace
 from flask import Flask, render_template, request, redirect, url_for
 import mysql.connector
@@ -41,16 +42,24 @@ def result_vehno(vehno):
 
 @app.route('/map', methods=['GET', 'POST'])
 def map():
+    if request.method == 'GET':
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM findV")
+        myresult = mycursor.fetchall()
+        return render_template('gmap.html', page_data=myresult,)
     if request.method == 'POST':
         vno = request.form.get('vno')
         # call /reults/vno
         # return for loop
-        data = [data for data in results(vno)]
-        return render_template('map.html',results=data)
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM findBlock where Vehno = %s", (vno,))
+        myresult = mycursor.fetchall()
+        return render_template('gmap.html',page_data=myresult,)
     else:
 
         #data = list(results(vno))
-        return render_template('map.html')
+        return render_template('gmap.html')
+
 @app.route('/add', methods=['POST','GET'])
 def add():
     if request.method == 'POST':
@@ -81,16 +90,20 @@ def block():
         myresult = mycursor.fetchall()
         mycursor.execute("select * from blockNO")
         myresult2 = mycursor.fetchall()
-        print(myresult)
-        print(myresult2)
-        if myresult[0] == myresult2[0]:
-        #mydb.commit()
-            print(myresult)
-            return render_template("block.html",results=myresult)
-        
+        for x in myresult2:
+            for i in myresult:
+                if i[0] == x[0]:
+                #mydb.commit()
+                    #print(x[0])
+                    mycursor.execute("SELECT * FROM findBlock WHERE Vehno = %s", (x[0],))
+                    resul = mycursor.fetchall()
+                    print(resul)
+                    return render_template("block.html",results=resul)
+                else:
+                    print('no found')
         return render_template("block.html")
     if request.method == 'POST':
-        Vehno = request.form.get('Vehno')
+        Vehno = request.form.get('block')
         # drop table if exists
         mycursor = mydb.cursor()
         mycursor.execute("insert into blockNO(vno) values(%s)",(Vehno,))
@@ -106,7 +119,11 @@ def block():
 
 
     #  mycursor = mydb.cursor()
-
-
+@app.route('/test')
+def test():
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT * FROM findV")
+    myresult = mycursor.fetchall()
+    return render_template('test.html', page_data=myresult,)
 if __name__ == '__main__':
     app.run(debug=True)
