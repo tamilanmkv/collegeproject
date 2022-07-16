@@ -5,10 +5,11 @@ import mysql.connector
 from flask_cors import CORS
 
 mydb = mysql.connector.connect(
-    host="lin-2550-2638-mysql-primary.servers.linodedb.net",
-    user="linroot",
-    passwd="wgghNd0PB4h-zie1",
-    database="find"
+    #put your sql username password host and database
+    host="sqlserver",
+    user="root",
+    passwd="changepassword",
+    database="mf"
 )
 
 
@@ -49,15 +50,11 @@ def map():
         return render_template('gmap.html', page_data=myresult,)
     if request.method == 'POST':
         vno = request.form.get('vno')
-        # call /reults/vno
-        # return for loop
         mycursor = mydb.cursor()
         mycursor.execute("SELECT * FROM findBlock where Vehno = %s", (vno,))
         myresult = mycursor.fetchall()
         return render_template('gmap.html',page_data=myresult,)
     else:
-
-        #data = list(results(vno))
         return render_template('gmap.html')
 
 @app.route('/add', methods=['POST','GET'])
@@ -74,7 +71,6 @@ def add():
         return render_template("index.html")
 @app.route('/other')
 def other():
-    # fetch data from findBlock
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM findBlock")
     myresult = mycursor.fetchall()
@@ -93,8 +89,6 @@ def block():
         for x in myresult2:
             for i in myresult:
                 if i[0] == x[0]:
-                #mydb.commit()
-                    #print(x[0])
                     mycursor.execute("SELECT * FROM findBlock WHERE Vehno = %s", (x[0],))
                     resul = mycursor.fetchall()
                     print(resul)
@@ -104,21 +98,12 @@ def block():
         return render_template("block.html")
     if request.method == 'POST':
         Vehno = request.form.get('block')
-        # drop table if exists
         mycursor = mydb.cursor()
         mycursor.execute("insert into blockNO(vno) values(%s)",(Vehno,))
         mydb.commit()
         mydb.close()
         return render_template("block.html")
-        #mycursor.execute("DROPapp.route('/cameras')
-#def cameras():
-#    return render_template('block.html')   TABLE IF EXISTS findBlock")
-#        
-#    else:
-#        return render_template("block.html")
 
-
-    #  mycursor = mydb.cursor()
 @app.route('/test')
 def test():
     mycursor = mydb.cursor()
