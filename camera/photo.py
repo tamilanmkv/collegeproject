@@ -8,9 +8,9 @@ import re
 import mysql.connector
 
 mydb = mysql.connector.connect(
-    host="lin-2550-2638-mysql-primary.servers.linodedb.net",
-    user="linroot",
-    passwd="wgghNd0PB4h-zie1",
+    host="sample.com",
+    user="root",
+    passwd="root",
     database="find"
 )
 import os
