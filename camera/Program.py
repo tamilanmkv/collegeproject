@@ -10,9 +10,9 @@ import re
 import mysql.connector
 
 mydb = mysql.connector.connect(
-    host="lin-2550-2638-mysql-primary.servers.linodedb.net",
-    user="linroot",
-    passwd="wgghNd0PB4h-zie1",
+    host="sample.com",
+    user="root",
+    passwd="root",
     database="find"
 )
 
@@ -130,14 +130,6 @@ for img in os.listdir("Dataset"):
         mycursor.execute("insert into findBlock(Vehno,Location,latitude,longitude) values(%s,'Bangalore','9.854980','78.500504');",(res2.upper().strip(),))
     else:
         print("No number plate detected")
-    #mycursor.execute("SELECT Latitude,Longitude FROM findV WHERE Vehno = %s", (res2,))
-    #mycursor.execute("SELECT * FROM findV")
-    #myresult = mycursor.fetchall()
-    #for x in myresult:
-    #    if(x[0] == "tn38z2332"):
-    #        print("found block list %s and his is in %s and lat %s and long %s"%(x[0],x[1],x[2],x[3])) 
-    #myresult = mycursor.fetcha  ll()
-    #mycursor.execute("INSERT INTO findV(Latidue,Location) VALUES('12345','Bangalore')")
     mydb.commit()
     print(res2)
 
